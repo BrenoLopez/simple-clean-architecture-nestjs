@@ -23,7 +23,6 @@ export class CreateUser implements BaseUseCase {
       const passwordHash = await this.hasher.hash(user.password);
       const userCreate = new UserEntity({ ...user, password: passwordHash });
       await this.userRepository.create(userCreate);
-      throw new Error();
       return userCreate.toJSON();
     } catch (error) {
       throw DomainError.UserAlreadyExist;
